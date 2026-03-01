@@ -1,7 +1,6 @@
 // DashboardCard.js
 
-import React from "react";
-
+import propTypes from 'prop-types';
 const DashboardCard = ({ title, content }) => {
   return (
     <div className="bg-white dark:bg-gray-400 border dark:text-white rounded-lg shadow-md p-6 mb-4">
@@ -9,6 +8,11 @@ const DashboardCard = ({ title, content }) => {
       <p>{content}</p>
     </div>
   );
+};
+
+DashboardCard.propTypes = {
+  title: propTypes.string.isRequired,
+  content: propTypes.string.isRequired,
 };
 
 export default DashboardCard;

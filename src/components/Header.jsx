@@ -1,17 +1,12 @@
-import React from "react";
-import { useNavigate, Link } from "react-router-dom"; // Import Link and useNavigate
-import restGestion from "../assets/images/imageHome4.webp";
-import "../style/Header.css";
+import { useNavigate, Link } from 'react-router-dom';
+import restGestion from '../assets/images/imageHome4.webp';
+import '../style/Header.css';
 
 const Header = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // Add animation
-    const img = document.getElementById("restGestion");
-
-    // Remove animation class after it ends and navigate
-    navigate("/register");
+    navigate('/register');
   };
 
   return (
@@ -22,8 +17,8 @@ const Header = () => {
             Welcome to Your Restaurant Management Platform
           </h2>
           <p className="text-white md:text-lg">
-            Easily manage your restaurant, products, offers, and clients with
-            our intuitive platform.
+            Easily manage your restaurant, products, offers, and clients with our intuitive
+            platform.
           </p>
         </div>
         <Link

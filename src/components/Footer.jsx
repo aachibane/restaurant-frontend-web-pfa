@@ -1,129 +1,93 @@
-import React from "react";
+import React from 'react';
 
 const Footer = () => {
   return (
-    <footer class="z-50 bg-tertiary dark:bg-opacity-80 dark:bg-[#111827] bg-opacity-25 backdrop-filter backdrop-blur-md body-font">
-      <div class="container px-5 py-24 mx-auto">
-        <div class="flex flex-wrap md:text-left text-center order-first">
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 class="title-font font-medium text-white dark:text-white tracking-widest text-sm mb-3">
+    <footer className="z-50 bg-tertiary dark:bg-opacity-80 dark:bg-[#111827] bg-opacity-25 backdrop-filter backdrop-blur-md body-font">
+      <div className="container px-5 py-24 mx-auto">
+        <div className="flex flex-wrap md:text-left text-center order-first">
+          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h2 className="title-font font-medium text-white dark:text-white tracking-widest text-sm mb-3">
               HOME
             </h2>
-            <nav class="list-none mb-10">
+            <nav className="list-none mb-10">
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/">
                   Home
                 </a>
               </li>
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/">
                   Details
                 </a>
               </li>
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/">
                   Location
                 </a>
               </li>
             </nav>
           </div>
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 class="title-font font-medium text-white dark:text-white tracking-widest text-sm mb-3">
+          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h2 className="title-font font-medium text-white dark:text-white tracking-widest text-sm mb-3">
               PRODUCTS & CATEGORIES
             </h2>
-            <nav class="list-none mb-10">
+            <nav className="list-none mb-10">
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/login"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/login">
                   Products
                 </a>
               </li>
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/login"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/login">
                   Produits Activés
                 </a>
               </li>
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/login"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/login">
                   Categories
                 </a>
               </li>
             </nav>
           </div>
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 class="title-font font-medium text-white dark:text-white tracking-widest text-sm mb-3">
+          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h2 className="title-font font-medium text-white dark:text-white tracking-widest text-sm mb-3">
               DASHBOARD
             </h2>
-            <nav class="list-none mb-10">
+            <nav className="list-none mb-10">
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/login"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/login">
                   Ordres
                 </a>
               </li>
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/login"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/login">
                   Serveurs
                 </a>
               </li>
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/login"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/login">
                   Clients
                 </a>
               </li>
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/login"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/login">
                   Points
                 </a>
               </li>
             </nav>
           </div>
-          <div class="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 class="title-font font-medium text-white dark:text-white tracking-widest text-sm mb-3">
+          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
+            <h2 className="title-font font-medium text-white dark:text-white tracking-widest text-sm mb-3">
               REWARDS & DISCOUNTS
             </h2>
-            <nav class="list-none mb-10">
+            <nav className="list-none mb-10">
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/login"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/login">
                   Rewards
                 </a>
               </li>
               <li>
-                <a
-                  class="text-white dark:text-white hover:text-gray-400"
-                  href="/login"
-                >
+                <a className="text-white dark:text-white hover:text-gray-400" href="/login">
                   Discounts
                 </a>
               </li>
@@ -132,20 +96,19 @@ const Footer = () => {
         </div>
       </div>
 
-      <div class="bg-quartenary dark:bg-[#111827] backdrop-filter backdrop-blur-md">
-        <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
+      <div className="bg-quartenary dark:bg-[#111827] backdrop-filter backdrop-blur-md">
+        <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
           <a
             href="/"
-            class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
+            className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900"
           >
             <svg
-              class="css-ze2te4 css-1j6mmh7"
-              className="h-8"
+              className="css-ze2te4 css-1j6mmh7 h-8"
               viewBox="0 0 44.871794871794876 44.871794871794876"
             >
               <g
                 transform="translate(-11.02724640868803, -11.013864000405867) scale(13.382580577579377)"
-                class="css-73gxgp"
+                className="css-73gxgp"
                 fill="#00adb5"
               >
                 <g xmlns="http://www.w3.org/2000/svg">
@@ -154,66 +117,66 @@ const Footer = () => {
                 </g>
               </g>
             </svg>
-            <span class="ml-3 text-xl dark:text-white">Coffee & Plates</span>
+            <span className="ml-3 text-xl dark:text-white">Coffee & Plates</span>
           </a>
-          <p class="text-sm text-gray-500 dark:text-white sm:ml-6 sm:mt-0 mt-4">
+          <p className="text-sm text-gray-500 dark:text-white sm:ml-6 sm:mt-0 mt-4">
             © 2024 Coffee & Plates —
             <a
               href="https://twitter.com/knyttneve"
               rel="noopener noreferrer"
-              class="text-gray-600 ml-1 dark:text-white"
+              className="text-gray-600 ml-1 dark:text-white"
               target="_blank"
             >
               @coffee&plates
             </a>
           </p>
-          <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-            <a class="text-gray-500 dark:text-white">
+          <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+            <a className="text-gray-500 dark:text-white">
               <svg
                 fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="w-5 h-5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
                 <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
               </svg>
             </a>
-            <a class="ml-3 text-gray-500 dark:text-white">
+            <a className="ml-3 text-gray-500 dark:text-white">
               <svg
                 fill="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="w-5 h-5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
                 <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
               </svg>
             </a>
-            <a class="ml-3 text-gray-500 dark:text-white">
+            <a className="ml-3 text-gray-500 dark:text-white">
               <svg
                 fill="none"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="w-5 h-5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
                 <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
                 <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
               </svg>
             </a>
-            <a class="ml-3 text-gray-500 dark:text-white">
+            <a className="ml-3 text-gray-500 dark:text-white">
               <svg
                 fill="currentColor"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="0"
-                class="w-5 h-5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="0"
+                className="w-5 h-5"
                 viewBox="0 0 24 24"
               >
                 <path

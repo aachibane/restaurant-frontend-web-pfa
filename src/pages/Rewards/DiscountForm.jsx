@@ -1,21 +1,17 @@
-import React, { useEffect, useState, useRef } from "react";
-import Form from "react-validation/build/form";
-import CheckButton from "react-validation/build/button";
-import AuthService from "../../services/auth.service";
-import DiscountService from "../../services/discount.service";
-import Input from "react-validation/build/input";
+import { useState, useRef } from 'react';
+import Form from 'react-validation/build/form';
+import CheckButton from 'react-validation/build/button';
+import DiscountService from '../../services/discount.service';
+import Input from 'react-validation/build/input';
+import PropTypes from 'prop-types';
 
-const required = (value) => {
+const required = value => {
   if (!value) {
-    return (
-      <div className="text-sm text-gray-500 dark:text-gray-300">
-        This field is required!
-      </div>
-    );
+    return <div className="text-sm text-gray-500 dark:text-gray-300">This field is required!</div>;
   }
 };
 
-const percentageValidator = (value) => {
+const percentageValidator = value => {
   const parsedValue = parseFloat(value);
   if (isNaN(parsedValue) || parsedValue < 0 || parsedValue > 100) {
     return (
@@ -29,50 +25,37 @@ const percentageValidator = (value) => {
 const DiscountForm = ({ product, toggleModal, updateCategories }) => {
   const form = useRef();
   const checkBtn = useRef();
-  const [currentUser, setCurrentUser] = useState(undefined);
-  const [loading, setLoading] = useState(true);
-  const [discountPercentage, setDiscountPercentage] = useState("");
+  const [discountPercentage, setDiscountPercentage] = useState('');
   const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
-
-  const onChangeDiscountPercentage = (e) => {
+  const onChangeDiscountPercentage = e => {
     const discountPer = e.target.value;
     setDiscountPercentage(discountPer);
   };
 
-  const handleDiscount = (e) => {
+  const handleDiscount = e => {
     e.preventDefault();
-    setMessage("");
+    setMessage('');
     setSuccessful(false);
 
     form.current.validateAll();
     if (checkBtn.current.context._errors.length === 0) {
       DiscountService.addDiscountByProductId(discountPercentage, product.id)
-        .then((response) => {
+        .then(response => {
           if (response && response.data) {
             setMessage(response.data.message);
             setSuccessful(true);
             updateCategories();
-            setDiscountPercentage("");
+            setDiscountPercentage('');
           } else {
-            setMessage("An error occurred while processing your request.");
+            setMessage('An error occurred while processing your request.');
             setSuccessful(false);
           }
         })
-        .catch((error) => {
+        .catch(error => {
           const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
+            (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString();
 
@@ -103,18 +86,13 @@ const DiscountForm = ({ product, toggleModal, updateCategories }) => {
               validations={[required, percentageValidator]}
               className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
-            {errors.discountPercentage && (
-              <div className="text-sm text-red-500 dark:text-red-400">
-                {errors.discountPercentage}
-              </div>
-            )}
           </div>
 
           {message && (
             <div className="text-sm text-center text-gray-700 dark:text-gray-200 mb-8">
               <div
                 className={`${
-                  successful ? "bg-green-500" : "bg-red-500"
+                  successful ? 'bg-green-500' : 'bg-red-500'
                 } text-white font-bold rounded-lg border border-white shadow-lg p-5`}
                 role="alert"
               >
@@ -122,11 +100,7 @@ const DiscountForm = ({ product, toggleModal, updateCategories }) => {
               </div>
             </div>
           )}
-          <CheckButton
-            className="text-sm"
-            style={{ display: "none" }}
-            ref={checkBtn}
-          />
+          <CheckButton className="text-sm" style={{ display: 'none' }} ref={checkBtn} />
           <div>
             <button
               type="submit"
@@ -146,6 +120,14 @@ const DiscountForm = ({ product, toggleModal, updateCategories }) => {
       </div>
     </div>
   );
+};
+
+DiscountForm.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }).isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  updateCategories: PropTypes.func.isRequired,
 };
 
 export default DiscountForm;

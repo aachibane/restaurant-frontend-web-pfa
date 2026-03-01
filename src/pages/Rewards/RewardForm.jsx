@@ -1,21 +1,17 @@
-import React, { useEffect, useState, useRef } from "react";
-import Form from "react-validation/build/form";
-import CheckButton from "react-validation/build/button";
-import AuthService from "../../services/auth.service";
-import RewardService from "../../services/reward.service";
-import Input from "react-validation/build/input";
+import { useState, useRef } from 'react';
+import Form from 'react-validation/build/form';
+import CheckButton from 'react-validation/build/button';
+import RewardService from '../../services/reward.service';
+import Input from 'react-validation/build/input';
+import PropTypes from 'prop-types';
 
-const required = (value) => {
+const required = value => {
   if (!value) {
-    return (
-      <div className="text-sm text-gray-500 dark:text-gray-300">
-        This field is required!
-      </div>
-    );
+    return <div className="text-sm text-gray-500 dark:text-gray-300">This field is required!</div>;
   }
 };
 
-const lessThanZero = (value) => {
+const lessThanZero = value => {
   if (value < 0) {
     return (
       <div className="text-sm text-gray-500 dark:text-gray-300">
@@ -26,52 +22,34 @@ const lessThanZero = (value) => {
 };
 
 const RewardForm = ({ product, toggleModal, updateCategories }) => {
-  const [currentUser, setCurrentUser] = useState(undefined);
-  const [loading, setLoading] = useState(true);
-  const [name, setName] = useState("");
-  const [requiredPoints, setRequiredPoints] = useState("");
+  const [requiredPoints, setRequiredPoints] = useState('');
   const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const form = useRef();
   const checkBtn = useRef();
 
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
-
-  const handleReward = (e) => {
+  const handleReward = e => {
     e.preventDefault();
-    setMessage("");
+    setMessage('');
     setSuccessful(false);
 
     form.current.validateAll();
     if (checkBtn.current.context._errors.length === 0) {
       RewardService.addRewardByProductId(requiredPoints, product.id)
-        .then((response) => {
-          console.log("Response:", response); // Check the value of response
+        .then(response => {
           if (response && response.data) {
-            console.log("Response data:", response.data); // Check the value of response.data
             setMessage(response.data.message);
             setSuccessful(true);
             updateCategories();
-            setRequiredPoints("");
-            //toggleModal();
+            setRequiredPoints('');
           } else {
-            console.error("Response or response data is undefined.");
-            setMessage("An error occurred while processing your request.");
+            setMessage('An error occurred while processing your request.');
             setSuccessful(false);
           }
         })
-        .catch((error) => {
-          console.error("Error:", error);
+        .catch(error => {
           const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
+            (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString();
 
@@ -86,11 +64,8 @@ const RewardForm = ({ product, toggleModal, updateCategories }) => {
       <div className="mx-auto w-full max-w-[550px]">
         <Form onSubmit={handleReward} ref={form}>
           <div className="mb-5">
-            <label
-              htmlFor="requiredPoints"
-              className="mb-3 block text-base font-medium text-black"
-            >
-              Required Points{console.log(product)}
+            <label htmlFor="requiredPoints" className="mb-3 block text-base font-medium text-black">
+              Required Points
             </label>
             <Input
               type="number"
@@ -98,8 +73,8 @@ const RewardForm = ({ product, toggleModal, updateCategories }) => {
               id="requiredPoints"
               placeholder="Enter required points"
               value={requiredPoints}
-              onChange={(e) => setRequiredPoints(e.target.value)}
-              validations={[required, lessThanZero]} // Add lessThanZero validator
+              onChange={e => setRequiredPoints(e.target.value)}
+              validations={[required, lessThanZero]}
               className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
             />
           </div>
@@ -108,7 +83,7 @@ const RewardForm = ({ product, toggleModal, updateCategories }) => {
             <div className="text-sm text-center text-gray-700 dark:text-gray-200 mb-8">
               <div
                 className={`${
-                  successful ? "bg-green-500" : "bg-red-500"
+                  successful ? 'bg-green-500' : 'bg-red-500'
                 } text-white font-bold rounded-lg border border-white shadow-lg p-5`}
                 role="alert"
               >
@@ -116,11 +91,7 @@ const RewardForm = ({ product, toggleModal, updateCategories }) => {
               </div>
             </div>
           )}
-          <CheckButton
-            className="text-sm"
-            style={{ display: "none" }}
-            ref={checkBtn}
-          />
+          <CheckButton className="text-sm" style={{ display: 'none' }} ref={checkBtn} />
           <div>
             <button
               type="submit"
@@ -140,6 +111,14 @@ const RewardForm = ({ product, toggleModal, updateCategories }) => {
       </div>
     </div>
   );
+};
+
+RewardForm.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+  }).isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  updateCategories: PropTypes.func.isRequired,
 };
 
 export default RewardForm;

@@ -2,12 +2,11 @@ name: Frontend CI
 
 on:
   push:
-    branches: [ "master", "develop" ]
+    branches: ['master', 'develop']
   pull_request:
-    branches: [ "master", "develop" ]
+    branches: ['master', 'develop']
 
 jobs:
-
   frontend-quality:
     name: Frontend Quality (ESLint + Prettier)
     runs-on: ubuntu-latest

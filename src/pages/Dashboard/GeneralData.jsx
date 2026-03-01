@@ -1,68 +1,68 @@
-import React from "react";
-import { Bar, Pie, Line, Doughnut } from "react-chartjs-2";
+import React from 'react';
+import { Bar, Pie, Line, Doughnut } from 'react-chartjs-2';
 
 const GeneralData = () => {
   // Sample data for each chart
   const chartData = {
     restaurantDistribution: {
-      labels: ["Restaurant A", "Restaurant B"],
+      labels: ['Restaurant A', 'Restaurant B'],
       datasets: [
         {
-          label: "Restaurant Distribution",
+          label: 'Restaurant Distribution',
           data: [10, 20], // Example data, replace with actual values
-          backgroundColor: ["#FF6384", "#36A2EB"],
+          backgroundColor: ['#FF6384', '#36A2EB'],
         },
       ],
     },
     waiterPerformance: {
-      labels: ["Waiter A", "Waiter B"],
+      labels: ['Waiter A', 'Waiter B'],
       datasets: [
         {
-          label: "Waiter Performance",
+          label: 'Waiter Performance',
           data: [30, 40], // Example data, replace with actual values
-          backgroundColor: ["#FFCE56", "#FF6384"],
+          backgroundColor: ['#FFCE56', '#FF6384'],
         },
       ],
     },
     productPriceTrend: {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
-          label: "Product Price Trend",
+          label: 'Product Price Trend',
           data: [65, 59, 80, 81, 56, 55, 40], // Example data, replace with actual values
           fill: false,
-          borderColor: "#36A2EB",
+          borderColor: '#36A2EB',
         },
       ],
     },
     clientOrderFrequency: {
-      labels: ["Client A", "Client B"],
+      labels: ['Client A', 'Client B'],
       datasets: [
         {
-          label: "Client Order Frequency",
+          label: 'Client Order Frequency',
           data: [10, 20], // Example data, replace with actual values
-          backgroundColor: ["#FF6384", "#FFCE56"],
+          backgroundColor: ['#FF6384', '#FFCE56'],
         },
       ],
     },
     topClientsByPoints: {
-      labels: ["Client A", "Client B"],
+      labels: ['Client A', 'Client B'],
       datasets: [
         {
-          label: "Top Clients by Points",
+          label: 'Top Clients by Points',
           data: [50, 70], // Example data, replace with actual values
-          backgroundColor: ["#FFCE56", "#FF6384"],
+          backgroundColor: ['#FFCE56', '#FF6384'],
         },
       ],
     },
     orderTrend: {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
-          label: "Order Trend",
+          label: 'Order Trend',
           data: [65, 59, 80, 81, 56, 55, 40], // Example data, replace with actual values
           fill: false,
-          borderColor: "#FFCE56",
+          borderColor: '#FFCE56',
         },
       ],
     },
@@ -72,7 +72,7 @@ const GeneralData = () => {
     plugins: {
       legend: {
         labels: {
-          color: "#000", // Set label color to black
+          color: '#000', // Set label color to black
         },
       },
     },
@@ -86,10 +86,7 @@ const GeneralData = () => {
         <div className="w-full flex justify-center">
           <div className="w-full md:w-96">
             <h3>Restaurant Distribution</h3>
-            <Pie
-              data={chartData.restaurantDistribution}
-              options={chartOptions}
-            />
+            <Pie data={chartData.restaurantDistribution} options={chartOptions} />
           </div>
         </div>
       </section>
@@ -122,10 +119,7 @@ const GeneralData = () => {
         <div className="w-full flex justify-center">
           <div className="w-full md:w-96">
             <h3>Client Order Frequency</h3>
-            <Doughnut
-              data={chartData.clientOrderFrequency}
-              options={chartOptions}
-            />
+            <Doughnut data={chartData.clientOrderFrequency} options={chartOptions} />
           </div>
         </div>
       </section>

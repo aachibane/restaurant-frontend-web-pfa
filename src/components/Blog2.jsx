@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Blog2 = () => {
   return (
@@ -9,8 +9,8 @@ const Blog2 = () => {
             Discover Our Restaurant Features
           </h1>
           <p className="lg:w-1/2 w-full leading-relaxed text-gray-300">
-            Explore the unique features that make our restaurant management
-            platform a must-have for your business.
+            Explore the unique features that make our restaurant management platform a must-have for
+            your business.
           </p>
         </div>
         <div className="flex flex-wrap -m-4">
@@ -33,8 +33,8 @@ const Blog2 = () => {
                 Inventory Management
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Keep track of your stock levels and reduce waste with our
-                efficient inventory management system.
+                Keep track of your stock levels and reduce waste with our efficient inventory
+                management system.
               </p>
             </div>
           </div>
@@ -59,8 +59,8 @@ const Blog2 = () => {
                 Order Tracking
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Monitor your orders in real-time and ensure timely deliveries to
-                keep your customers happy.
+                Monitor your orders in real-time and ensure timely deliveries to keep your customers
+                happy.
               </p>
             </div>
           </div>
@@ -84,8 +84,8 @@ const Blog2 = () => {
                 Customer Management
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Maintain detailed profiles of your customers to enhance their
-                dining experience and build loyalty.
+                Maintain detailed profiles of your customers to enhance their dining experience and
+                build loyalty.
               </p>
             </div>
           </div>
@@ -108,8 +108,8 @@ const Blog2 = () => {
                 Table Reservations
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Simplify the reservation process and manage table bookings
-                efficiently to avoid overbooking.
+                Simplify the reservation process and manage table bookings efficiently to avoid
+                overbooking.
               </p>
             </div>
           </div>
@@ -132,8 +132,8 @@ const Blog2 = () => {
                 Analytics & Reporting
               </h2>
               <p className="leading-relaxed text-base dark:text-white">
-                Access detailed reports and analytics to make informed business
-                decisions and drive growth.
+                Access detailed reports and analytics to make informed business decisions and drive
+                growth.
               </p>
             </div>
           </div>
@@ -156,8 +156,8 @@ const Blog2 = () => {
                 Marketing Tools
               </h2>
               <p className="leading-relaxed text-base">
-                Utilize our marketing tools to reach out to customers and keep
-                them engaged with special offers.
+                Utilize our marketing tools to reach out to customers and keep them engaged with
+                special offers.
               </p>
             </div>
           </div>

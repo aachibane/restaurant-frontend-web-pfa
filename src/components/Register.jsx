@@ -1,33 +1,29 @@
-import React, { useState, useRef } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
+import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
+import { isEmail } from 'validator';
 
-import AuthService from "../services/auth.service";
+import AuthService from '../services/auth.service';
 
-const required = (value) => {
+const required = value => {
   if (!value) {
     return (
-      <div className="text-sm text-quartenary dark:text-gray-300">
-        This field is required!
-      </div>
+      <div className="text-sm text-quartenary dark:text-gray-300">This field is required!</div>
     );
   }
 };
 
-const validEmail = (value) => {
+const validEmail = value => {
   if (!isEmail(value)) {
     return (
-      <div className="text-sm text-gray-500 dark:text-gray-300">
-        This is not a valid email.
-      </div>
+      <div className="text-sm text-gray-500 dark:text-gray-300">This is not a valid email.</div>
     );
   }
 };
 
-const vusername = (value) => {
+const vusername = value => {
   if (value.length < 3 || value.length > 20) {
     return (
       <div className="text-sm text-gray-500 dark:text-gray-300">
@@ -37,7 +33,7 @@ const vusername = (value) => {
   }
 };
 
-const vpassword = (value) => {
+const vpassword = value => {
   if (value.length < 6 || value.length > 40) {
     return (
       <div className="text-sm text-gray-500 dark:text-gray-300">
@@ -47,64 +43,60 @@ const vpassword = (value) => {
   }
 };
 
-const Register = (props) => {
+const Register = () => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
   const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
-  const onChangeUsername = (e) => {
+  const onChangeUsername = e => {
     const username = e.target.value;
     setUsername(username);
   };
 
-  const onChangeEmail = (e) => {
+  const onChangeEmail = e => {
     const email = e.target.value;
     setEmail(email);
   };
 
-  const onChangePassword = (e) => {
+  const onChangePassword = e => {
     const password = e.target.value;
     setPassword(password);
   };
 
-  const onChangeName = (e) => {
+  const onChangeName = e => {
     const name = e.target.value;
     setName(name);
   };
 
-  const onChangePhone = (e) => {
+  const onChangePhone = e => {
     const phone = e.target.value;
     setPhone(phone);
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = e => {
     e.preventDefault();
 
-    setMessage("");
+    setMessage('');
     setSuccessful(false);
 
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, email, password, name, phone, [
-        "admin",
-      ]).then(
-        (response) => {
+      AuthService.register(username, email, password, name, phone, ['admin']).then(
+        response => {
           setMessage(response.data.message);
           setSuccessful(true);
         },
-        (error) => {
+        error => {
           const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
+            (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString();
 
@@ -125,11 +117,7 @@ const Register = (props) => {
       <h1 className="text-xl font-bold text-center text-quartenary dark:text-gray-200 mb-5 mt-4">
         Welcome to Coffee & Plates
       </h1>
-      <Form
-        onSubmit={handleRegister}
-        ref={form}
-        className="w-full flex flex-col gap-4"
-      >
+      <Form onSubmit={handleRegister} ref={form} className="w-full flex flex-col gap-4">
         {!successful && (
           <div className="flex items-start flex-col justify-start">
             <div className="w-full">
@@ -149,10 +137,7 @@ const Register = (props) => {
                 validations={[required]}
               />
 
-              <label
-                htmlFor="username"
-                className="text-sm text-quartenary dark:text-gray-200 mr-2"
-              >
+              <label htmlFor="username" className="text-sm text-quartenary dark:text-gray-200 mr-2">
                 Username:
               </label>
               <Input
@@ -165,10 +150,7 @@ const Register = (props) => {
                 validations={[required, vusername]}
               />
 
-              <label
-                htmlFor="email"
-                className="text-sm text-quartenary dark:text-gray-200 mr-2"
-              >
+              <label htmlFor="email" className="text-sm text-quartenary dark:text-gray-200 mr-2">
                 Email:
               </label>
               <Input
@@ -182,10 +164,7 @@ const Register = (props) => {
                 validations={[required, validEmail]}
               />
 
-              <label
-                htmlFor="password"
-                className="text-sm text-quartenary dark:text-gray-200 mr-2"
-              >
+              <label htmlFor="password" className="text-sm text-quartenary dark:text-gray-200 mr-2">
                 Password:
               </label>
               <Input
@@ -198,10 +177,7 @@ const Register = (props) => {
                 validations={[required, vpassword]}
               />
 
-              <label
-                htmlFor="phone"
-                className="text-sm text-quartenary dark:text-gray-200 mr-2"
-              >
+              <label htmlFor="phone" className="text-sm text-quartenary dark:text-gray-200 mr-2">
                 Phone:
               </label>
               <Input
@@ -220,7 +196,7 @@ const Register = (props) => {
           <div className="text-sm text-center text-gray-700 dark:text-gray-200 mb-8">
             <div
               className={`${
-                successful ? "bg-green-500" : "bg-red-500"
+                successful ? 'bg-green-500' : 'bg-red-500'
               } text-white font-bold rounded-lg border border-white shadow-lg p-5`}
               role="alert"
             >
@@ -229,11 +205,7 @@ const Register = (props) => {
           </div>
         )}
 
-        <CheckButton
-          className="text-sm"
-          style={{ display: "none" }}
-          ref={checkBtn}
-        />
+        <CheckButton className="text-sm" style={{ display: 'none' }} ref={checkBtn} />
         {!successful && (
           <button
             type="submit"
@@ -246,9 +218,9 @@ const Register = (props) => {
       {!successful && (
         <div className="mt-4 text-center">
           <span className="text-sm text-quartenary dark:text-gray-300">
-            Already have an account?{" "}
+            Already have an account?{' '}
           </span>
-          <Link to={"/login"} className="text-tertiary hover:text-quartenary">
+          <Link to={'/login'} className="text-tertiary hover:text-quartenary">
             Login
           </Link>
         </div>

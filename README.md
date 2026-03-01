@@ -8,11 +8,11 @@ A React-based web application built for **restaurant owners** to manage and moni
 
 ## Related Repositories
 
-| Project | Description |
-|--------|-------------|
+| Project                                                            | Description                                                   |
+| ------------------------------------------------------------------ | ------------------------------------------------------------- |
 | [Backend API](https://github.com/aachibane/restaurant-backend-pfa) | Spring Boot REST API serving this web app and the mobile apps |
-| Mobile App (Clients) | React Native app for customers |
-| Mobile App (Waiters) | React Native app for restaurant staff |
+| Mobile App (Clients)                                               | React Native app for customers                                |
+| Mobile App (Waiters)                                               | React Native app for restaurant staff                         |
 
 ---
 
@@ -31,15 +31,15 @@ A React-based web application built for **restaurant owners** to manage and moni
 
 ## Tech Stack
 
-| Technology | Purpose |
-|------------|---------|
-| React.js | Frontend framework |
-| React Hooks | State management |
-| React Router | Client-side routing |
-| Axios | HTTP requests to the API |
-| Tailwind CSS | Styling |
+| Technology   | Purpose                    |
+| ------------ | -------------------------- |
+| React.js     | Frontend framework         |
+| React Hooks  | State management           |
+| React Router | Client-side routing        |
+| Axios        | HTTP requests to the API   |
+| Tailwind CSS | Styling                    |
 | Formik + Yup | Form handling & validation |
-| JWT | Authentication tokens |
+| JWT          | Authentication tokens      |
 
 ---
 
@@ -90,13 +90,13 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 This app connects to the Spring Boot backend. Make sure it's running before launching the frontend. Key endpoints used:
 
-| Resource | Endpoint |
-|----------|----------|
-| Auth | `POST /auth/login` |
-| Users | `GET /api/users` |
-| Orders | `GET /api/orders` |
-| Menu | `GET /api/menu` |
-| Offers | `GET /api/offers` |
+| Resource | Endpoint           |
+| -------- | ------------------ |
+| Auth     | `POST /auth/login` |
+| Users    | `GET /api/users`   |
+| Orders   | `GET /api/orders`  |
+| Menu     | `GET /api/menu`    |
+| Offers   | `GET /api/offers`  |
 
 Authentication uses JWT — the token is stored in an HttpOnly cookie and sent automatically with each request.
 

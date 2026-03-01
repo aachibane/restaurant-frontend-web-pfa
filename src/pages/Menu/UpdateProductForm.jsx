@@ -1,74 +1,45 @@
-import React, { useEffect, useState, useRef } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import ProdService from "../../services/product.service";
-import AuthService from "../../services/auth.service";
+import { useState, useRef } from 'react';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
+import ProdService from '../../services/product.service';
+import propTypes from 'prop-types';
 
-const required = (value) => {
+const required = value => {
   if (!value) {
-    return (
-      <div className="text-sm text-gray-500 dark:text-gray-300">
-        This field is required!
-      </div>
-    );
+    return <div className="text-sm text-gray-500 dark:text-gray-300">This field is required!</div>;
   }
 };
 
-const UpdateProductForm = ({
-  product,
-  toggleUpdateProductModal,
-  updateCategories,
-}) => {
-  const [currentUser, setCurrentUser] = useState(undefined);
-  const [name, setName] = useState("");
-  const [info, setInfo] = useState("");
-  const [price, setPrice] = useState("");
-  const [bonusPoints, setBonusPoints] = useState("");
+const UpdateProductForm = ({ product, toggleUpdateProductModal, updateCategories }) => {
+  const [name, setName] = useState('');
+  const [info, setInfo] = useState('');
+  const [price, setPrice] = useState('');
+  const [bonusPoints, setBonusPoints] = useState('');
 
   const [productFile, setProductFile] = useState(null);
   const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const form = useRef();
   const checkBtn = useRef();
 
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
+  const onChangeName = e => setName(e.target.value);
+  const onChangeInfo = e => setInfo(e.target.value);
+  const onChangePrice = e => setPrice(e.target.value);
+  const onChangeBonusPoints = e => setBonusPoints(e.target.value);
 
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
-
-  const onChangeName = (e) => setName(e.target.value);
-  const onChangeInfo = (e) => setInfo(e.target.value);
-  const onChangePrice = (e) => setPrice(e.target.value);
-  const onChangeBonusPoints = (e) => setBonusPoints(e.target.value);
-
-  const handleProductFileChange = (e) => {
+  const handleProductFileChange = e => {
     const selectedFile = e.target.files[0];
     setProductFile(selectedFile);
-    console.log("File details:", selectedFile);
   };
 
-  const handleProduct = (e) => {
+  const handleProduct = e => {
     e.preventDefault();
 
-    setMessage("");
+    setMessage('');
     setSuccessful(false);
 
     form.current.validateAll();
-    const ownerId = currentUser.ownerId;
-    console.log(
-      JSON.stringify({
-        name,
-        info,
-        price,
-        bonusPoints,
-        ownerId,
-      })
-    );
-
     if (checkBtn.current.context._errors.length === 0) {
       const formData = new FormData();
 
@@ -80,23 +51,21 @@ const UpdateProductForm = ({
       });
 
       const blob = new Blob([json], {
-        type: "application/json",
+        type: 'application/json',
       });
 
-      formData.append("product", blob);
-      formData.append("productFile", productFile);
+      formData.append('product', blob);
+      formData.append('productFile', productFile);
 
       ProdService.updateProductByCategorieId(formData, product.id).then(
-        (response) => {
+        response => {
           setMessage(response.data.message);
           setSuccessful(true);
           updateCategories();
         },
-        (error) => {
+        error => {
           const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
+            (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString();
 
@@ -111,11 +80,8 @@ const UpdateProductForm = ({
     <div className="flex items-center justify-center p-5">
       <div className="mx-auto w-full max-w-[550px]">
         <Form onSubmit={handleProduct} ref={form} className="w-full">
-          <div class="mb-5 w-full">
-            <label
-              for="name"
-              class="mb-3 text-black font-medium text-[#07074D]"
-            >
+          <div className="mb-5 w-full">
+            <label htmlFor="name" className="mb-3 text-black font-medium text-[#07074D]">
               Product Name To Update with id: {product.id}
             </label>
             <Input
@@ -130,11 +96,8 @@ const UpdateProductForm = ({
             />
           </div>
 
-          <div class="mb-5">
-            <label
-              for="price"
-              class="mb-3 block text-black font-medium text-[#07074D]"
-            >
+          <div className="mb-5">
+            <label htmlFor="price" className="mb-3 block text-black font-medium text-[#07074D]">
               Price
             </label>
             <Input
@@ -149,11 +112,8 @@ const UpdateProductForm = ({
             />
           </div>
 
-          <div class="mb-5">
-            <label
-              for="phone"
-              class="mb-3 block text-black font-medium text-[#07074D]"
-            >
+          <div className="mb-5">
+            <label htmlFor="phone" className="mb-3 block text-black font-medium text-[#07074D]">
               Bonus Points
             </label>
             <Input
@@ -168,11 +128,8 @@ const UpdateProductForm = ({
             />
           </div>
 
-          <div class="mb-5">
-            <label
-              for="Info"
-              class="mb-3 block text-black font-medium text-[#07074D]"
-            >
+          <div className="mb-5">
+            <label htmlFor="Info" className="mb-3 block text-black font-medium text-[#07074D]">
               Info
             </label>
             <Input
@@ -187,10 +144,7 @@ const UpdateProductForm = ({
           </div>
 
           <div className="mb-10">
-            <label
-              htmlFor="image"
-              className="mb-3 block text-black font-medium text-[#07074D]"
-            >
+            <label htmlFor="image" className="mb-3 block text-black font-medium text-[#07074D]">
               Product Image
             </label>
             <Input
@@ -205,7 +159,7 @@ const UpdateProductForm = ({
             <div className="text-sm text-center text-gray-700 dark:text-gray-200 mb-8">
               <div
                 className={`${
-                  successful ? "bg-green-500" : "bg-red-500"
+                  successful ? 'bg-green-500' : 'bg-red-500'
                 } text-white font-bold rounded-lg border border-white shadow-lg p-5`}
                 role="alert"
               >
@@ -213,15 +167,11 @@ const UpdateProductForm = ({
               </div>
             </div>
           )}
-          <CheckButton
-            className="text-sm"
-            style={{ display: "none" }}
-            ref={checkBtn}
-          />
+          <CheckButton className="text-sm" style={{ display: 'none' }} ref={checkBtn} />
           <div>
             <button
               type="submit"
-              class="hover:shadow-form rounded-md bg-tertiary hover:bg-[#007B82] py-3 px-8 text-base font-semibold text-white outline-none"
+              className="hover:shadow-form rounded-md bg-tertiary hover:bg-[#007B82] py-3 px-8 text-base font-semibold text-white outline-none"
             >
               Submit
             </button>
@@ -237,6 +187,12 @@ const UpdateProductForm = ({
       </div>
     </div>
   );
+};
+
+UpdateProductForm.propTypes = {
+  product: propTypes.object.isRequired,
+  toggleUpdateProductModal: propTypes.func.isRequired,
+  updateCategories: propTypes.func.isRequired,
 };
 
 export default UpdateProductForm;

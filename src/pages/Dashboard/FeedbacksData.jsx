@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import RestService from "../../services/restaurant.service";
-import FeedbackService from "../../services/dashboard.service";
-import DashboardCard from "./DashboardCard";
-import Chart from "chart.js/auto";
+import { useEffect, useState } from 'react';
+import RestService from '../../services/restaurant.service';
+import FeedbackService from '../../services/dashboard.service';
 
 const FeedbacksData = () => {
   const [restaurantOwned, setRestaurantOwned] = useState(null);
@@ -15,19 +13,17 @@ const FeedbacksData = () => {
         const response = await RestService.getRestaurantByOwnerId();
         const restaurantOwned = response.data;
         setRestaurantOwned(restaurantOwned);
-
-        const responseFeedbacks =
-          await FeedbackService.getFeedbacksByRestaurantId(restaurantOwned.id);
+        const responseFeedbacks = await FeedbackService.getFeedbacksByRestaurantId(
+          restaurantOwned.id
+        );
         const feedbacks = responseFeedbacks.data;
         setFeedbacks(feedbacks);
 
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching your restaurant:", error);
         setLoading(false);
       }
     };
-
     fetchRestaurants();
   }, []);
 
@@ -50,7 +46,7 @@ const FeedbacksData = () => {
             </thead>
             <tbody>
               {feedbacks &&
-                feedbacks.map((feedback) => (
+                feedbacks.map(feedback => (
                   <tr
                     key={feedback.id}
                     className="hover:bg-gray-100 dark:bg-gray-800 dark:text-white bg-white bg-opacity-25 "

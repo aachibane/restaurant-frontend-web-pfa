@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "http://localhost:3000/api/reward/";
+const API_URL = 'http://localhost:3000/api/reward/';
 
 const addRewardByProductId = (requiredPoints, productId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -13,7 +13,7 @@ const addRewardByProductId = (requiredPoints, productId) => {
   };
 
   return axios.post(
-    API_URL + "product/" + productId,
+    API_URL + 'product/' + productId,
     {
       requiredPoints,
     },
@@ -21,8 +21,8 @@ const addRewardByProductId = (requiredPoints, productId) => {
   );
 };
 
-const getRewardByProductId = (productId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const getRewardByProductId = productId => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -31,11 +31,11 @@ const getRewardByProductId = (productId) => {
     },
   };
 
-  return axios.get(API_URL + "product/" + productId, config);
+  return axios.get(API_URL + 'product/' + productId, config);
 };
 
-const deleteRewardByProductId = (rewardId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const deleteRewardByProductId = rewardId => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {

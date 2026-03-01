@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
 
 const Breadcrumbs = ({ paths }) => {
   return (
-    <div class="bg-quartenary dark:bg-gray-800 shadow">
-      <div class="container flex items-center px-6 py-4 mx-auto overflow-x-auto whitespace-nowrap">
-        <a href="#" class="text-gray-600 dark:text-gray-200 mr-4">
+    <div className="bg-quartenary dark:bg-gray-800 shadow">
+      <div className="container flex items-center px-6 py-4 mx-auto overflow-x-auto whitespace-nowrap">
+        <a href="#" className="text-gray-600 dark:text-gray-200 mr-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5"
+            className="w-5 h-5"
             viewBox="0 0 20 20"
             fill="currentColor"
           >
@@ -34,22 +34,26 @@ const Breadcrumbs = ({ paths }) => {
               </span>
             )}
             {index !== paths.length - 1 ? (
-              <Link
-                className="text-gray-600 dark:text-gray-200 hover:underline mr-2"
-                to={path.url}
-              >
+              <Link className="text-gray-600 dark:text-gray-200 hover:underline mr-2" to={path.url}>
                 {path.name}
               </Link>
             ) : (
-              <span className="text-black dark:text-gray-100 mr-2">
-                {path.name}
-              </span>
+              <span className="text-black dark:text-gray-100 mr-2">{path.name}</span>
             )}
           </span>
         ))}
       </div>
     </div>
   );
+};
+
+Breadcrumbs.propTypes = {
+  paths: propTypes.arrayOf(
+    propTypes.shape({
+      name: propTypes.string.isRequired,
+      url: propTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default Breadcrumbs;

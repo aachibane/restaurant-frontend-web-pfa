@@ -1,16 +1,14 @@
-import React, { useState, useRef } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import AuthService from "../services/auth.service";
+import { useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
+import AuthService from '../services/auth.service';
 
-const required = (value) => {
+const required = value => {
   if (!value) {
     return (
-      <div className="text-sm text-quartenary dark:text-gray-300">
-        This field is required!
-      </div>
+      <div className="text-sm text-quartenary dark:text-gray-300">This field is required!</div>
     );
   }
 };
@@ -19,27 +17,27 @@ const Login = () => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   const navigate = useNavigate();
 
-  const onChangeUsername = (e) => {
+  const onChangeUsername = e => {
     const username = e.target.value;
     setUsername(username);
   };
 
-  const onChangePassword = (e) => {
+  const onChangePassword = e => {
     const password = e.target.value;
     setPassword(password);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = e => {
     e.preventDefault();
 
-    setMessage("");
+    setMessage('');
     setLoading(true);
 
     form.current.validateAll();
@@ -47,14 +45,12 @@ const Login = () => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.login(username, password).then(
         () => {
-          navigate("/home");
+          navigate('/home');
           window.location.reload();
         },
-        (error) => {
+        error => {
           const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
+            (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString();
 
@@ -77,17 +73,10 @@ const Login = () => {
       <h1 className="text-xl text-center text-quartenary dark:text-gray-200 mb-8">
         Welcome to Coffee & Plates
       </h1>
-      <Form
-        onSubmit={handleLogin}
-        ref={form}
-        className="w-full flex flex-col gap-4"
-      >
+      <Form onSubmit={handleLogin} ref={form} className="w-full flex flex-col gap-4">
         <div className="flex items-start flex-col justify-start">
           <div className="w-full">
-            <label
-              htmlFor="username"
-              className="text-sm text-quartenary dark:text-gray-200 mr-2"
-            >
+            <label htmlFor="username" className="text-sm text-quartenary dark:text-gray-200 mr-2">
               Username:
             </label>
             <Input
@@ -99,10 +88,7 @@ const Login = () => {
               onChange={onChangeUsername}
               validations={[required]}
             />
-            <label
-              htmlFor="password"
-              className="text-sm text-quartenary dark:text-gray-200 mr-2"
-            >
+            <label htmlFor="password" className="text-sm text-quartenary dark:text-gray-200 mr-2">
               Password:
             </label>
             <Input
@@ -127,14 +113,10 @@ const Login = () => {
           </div>
         )}
 
-        <CheckButton
-          className="text-sm"
-          style={{ display: "none" }}
-          ref={checkBtn}
-        />
+        <CheckButton className="text-sm" style={{ display: 'none' }} ref={checkBtn} />
         <button
           className={`bg-quartenary hover:bg-tertiary text-secondary font-medium py-2 px-4 rounded-md shadow-sm ${
-            loading ? "opacity-50 cursor-not-allowed" : ""
+            loading ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           disabled={loading}
         >
@@ -148,9 +130,9 @@ const Login = () => {
       </Form>
       <div className="mt-4 text-center">
         <span className="text-sm text-quartenary dark:text-gray-300">
-          Don't have an account yet?{" "}
+          Don&apos;t have an account yet?{' '}
         </span>
-        <Link to={"/register"} className="text-tertiary hover:text-quartenary">
+        <Link to={'/register'} className="text-tertiary hover:text-quartenary">
           Sign Up
         </Link>
       </div>

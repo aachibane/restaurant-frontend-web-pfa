@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import RestService from "../../services/restaurant.service";
-import WaiterService from "../../services/dashboard.service";
+import React, { useEffect, useState } from 'react';
+import RestService from '../../services/restaurant.service';
+import WaiterService from '../../services/dashboard.service';
 
 const WaitersData = () => {
   const [restaurantOwned, setRestaurantOwned] = useState(null);
@@ -14,15 +14,12 @@ const WaitersData = () => {
         const restaurantOwned = response.data;
         setRestaurantOwned(restaurantOwned);
 
-        const responseWaiters = await WaiterService.getWaitersByRestaurantId(
-          restaurantOwned.id
-        );
+        const responseWaiters = await WaiterService.getWaitersByRestaurantId(restaurantOwned.id);
         const waiters = responseWaiters.data;
         setWaiters(waiters);
 
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching your restaurant:", error);
         setLoading(false);
       }
     };
@@ -38,20 +35,16 @@ const WaitersData = () => {
           <h2 className="text-lg font-bold">Restaurant Owned</h2>
           <div className="grid grid-cols-2 gap-4">
             <p>
-              <span className="font-semibold">Name:</span>{" "}
-              {restaurantOwned.name}
+              <span className="font-semibold">Name:</span> {restaurantOwned.name}
             </p>
             <p>
-              <span className="font-semibold">Description:</span>{" "}
-              {restaurantOwned.description}
+              <span className="font-semibold">Description:</span> {restaurantOwned.description}
             </p>
             <p>
-              <span className="font-semibold">Phone:</span>{" "}
-              {restaurantOwned.phone}
+              <span className="font-semibold">Phone:</span> {restaurantOwned.phone}
             </p>
             <p>
-              <span className="font-semibold">Email:</span>{" "}
-              {restaurantOwned.email}
+              <span className="font-semibold">Email:</span> {restaurantOwned.email}
             </p>
           </div>
         </div>
@@ -69,7 +62,7 @@ const WaitersData = () => {
                 </tr>
               </thead>
               <tbody>
-                {waiters.map((waiter) => (
+                {waiters.map(waiter => (
                   <tr
                     key={waiter.id}
                     className="hover:bg-white bg-white dark:text-white dark:bg-gray-800 bg-opacity-25 border"

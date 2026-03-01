@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "http://localhost:3000/api/food-categories/";
+const API_URL = 'http://localhost:3000/api/food-categories/';
 
 const addCategorie = (name, restaurantId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -22,7 +22,7 @@ const addCategorie = (name, restaurantId) => {
 };
 
 const modifyCategorie = (name, categoryId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -40,8 +40,8 @@ const modifyCategorie = (name, categoryId) => {
   );
 };
 
-const getCategoriesByRestaurantId = (restaurantId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const getCategoriesByRestaurantId = restaurantId => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -49,7 +49,7 @@ const getCategoriesByRestaurantId = (restaurantId) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.get(API_URL + "restaurant/" + restaurantId, config);
+  return axios.get(API_URL + 'restaurant/' + restaurantId, config);
 };
 
 const CategorieService = {

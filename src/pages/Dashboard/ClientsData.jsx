@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import RestService from "../../services/restaurant.service";
-import ClientParticipationService from "../../services/dashboard.service";
+import { useEffect, useState } from 'react';
+import RestService from '../../services/restaurant.service';
+import ClientParticipationService from '../../services/dashboard.service';
 
 const ClientsData = () => {
   const [restaurantOwned, setRestaurantOwned] = useState(null);
@@ -15,15 +15,12 @@ const ClientsData = () => {
         setRestaurantOwned(restaurantOwned);
 
         const responseClientsParticipation =
-          await ClientParticipationService.getParticipationsByRestaurantId(
-            restaurantOwned.id
-          );
+          await ClientParticipationService.getParticipationsByRestaurantId(restaurantOwned.id);
         const clientsParticipation = responseClientsParticipation.data;
         setClientsParticipation(clientsParticipation);
 
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching your restaurant:", error);
         setLoading(false);
       }
     };

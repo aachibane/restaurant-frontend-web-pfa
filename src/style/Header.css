@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:700');
 
 body {
-  font-family:'Roboto';
-  background-color: #131417;  
+  font-family: 'Roboto';
+  background-color: #131417;
 }
 p {
-  text-shadow: 0 0 7px rgba(255,255,255,.3), 0 0 3px rgba(255,255,255,.3);
+  text-shadow:
+    0 0 7px rgba(255, 255, 255, 0.3),
+    0 0 3px rgba(255, 255, 255, 0.3);
 }
 .header_animation_codepen_1 {
   color: #e5e5e5;
@@ -17,16 +19,16 @@ p {
 }
 
 .animation {
-  height:50px;
-  overflow:hidden;
+  height: 50px;
+  overflow: hidden;
   margin-left: 1rem;
 }
 
 .animation > div > div {
   padding: 0.25rem 0.75rem;
-  height:2.81rem;
+  height: 2.81rem;
   margin-bottom: 2.81rem;
-  display:inline-block;
+  display: inline-block;
 }
 
 .animation div:first-child {
@@ -34,24 +36,44 @@ p {
 }
 
 .first div {
-  background-color:#20a7d8;
+  background-color: #20a7d8;
 }
 .second div {
-  background-color:#CD921E;
+  background-color: #cd921e;
 }
 .third div {
-  background-color:#c10528;
+  background-color: #c10528;
 }
 
 @keyframes text-animation {
-  0% {margin-top: 0;}
-  10% {margin-top: 0;}
-  20% {margin-top: -5.62rem;}
-  30% {margin-top: -5.62rem;}
-  40% {margin-top: -11.24rem;}
-  60% {margin-top: -11.24rem;}
-  70% {margin-top: -5.62rem;}
-  80% {margin-top: -5.62rem;}
-  90% {margin-top: 0;}
-  100% {margin-top: 0;}
+  0% {
+    margin-top: 0;
+  }
+  10% {
+    margin-top: 0;
+  }
+  20% {
+    margin-top: -5.62rem;
+  }
+  30% {
+    margin-top: -5.62rem;
+  }
+  40% {
+    margin-top: -11.24rem;
+  }
+  60% {
+    margin-top: -11.24rem;
+  }
+  70% {
+    margin-top: -5.62rem;
+  }
+  80% {
+    margin-top: -5.62rem;
+  }
+  90% {
+    margin-top: 0;
+  }
+  100% {
+    margin-top: 0;
+  }
 }

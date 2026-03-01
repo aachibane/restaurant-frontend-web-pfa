@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "http://localhost:3000/api/orders/";
+const API_URL = 'http://localhost:3000/api/orders/';
 
-const getOrdersByRestaurantId = (restaurantId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const getOrdersByRestaurantId = restaurantId => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -11,12 +11,12 @@ const getOrdersByRestaurantId = (restaurantId) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.get(API_URL + "restaurant/" + restaurantId, config);
+  return axios.get(API_URL + 'restaurant/' + restaurantId, config);
 };
 
-const API_URLFeedbacks = "http://localhost:3000/api/feedback/";
-const getFeedbacksByRestaurantId = (restaurantId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const API_URLFeedbacks = 'http://localhost:3000/api/feedback/';
+const getFeedbacksByRestaurantId = restaurantId => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -24,12 +24,12 @@ const getFeedbacksByRestaurantId = (restaurantId) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.get(API_URLFeedbacks + "restaurant/" + restaurantId, config);
+  return axios.get(API_URLFeedbacks + 'restaurant/' + restaurantId, config);
 };
 
-const API_URLWaiters = "http://localhost:3000/api/waiters/";
-const getWaitersByRestaurantId = (restaurantId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const API_URLWaiters = 'http://localhost:3000/api/waiters/';
+const getWaitersByRestaurantId = restaurantId => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -37,12 +37,12 @@ const getWaitersByRestaurantId = (restaurantId) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.get(API_URLWaiters + "restaurant/" + restaurantId, config);
+  return axios.get(API_URLWaiters + 'restaurant/' + restaurantId, config);
 };
 
-const API_URLClients = "http://localhost:3000/api/participation/";
-const getParticipationsByRestaurantId = (restaurantId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const API_URLClients = 'http://localhost:3000/api/participation/';
+const getParticipationsByRestaurantId = restaurantId => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -50,7 +50,7 @@ const getParticipationsByRestaurantId = (restaurantId) => {
       Authorization: `Bearer ${token}`,
     },
   };
-  return axios.get(API_URLClients + "restaurant/" + restaurantId, config);
+  return axios.get(API_URLClients + 'restaurant/' + restaurantId, config);
 };
 
 const DashboardService = {

@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "http://localhost:3000/api/discount/";
+const API_URL = 'http://localhost:3000/api/discount/';
 
 const addDiscountByProductId = (discountPercentage, productId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -13,7 +13,7 @@ const addDiscountByProductId = (discountPercentage, productId) => {
   };
 
   return axios.post(
-    API_URL + "product/" + productId,
+    API_URL + 'product/' + productId,
     {
       discountPercentage,
     },
@@ -21,8 +21,8 @@ const addDiscountByProductId = (discountPercentage, productId) => {
   );
 };
 
-const getDiscountByProductId = (productId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const getDiscountByProductId = productId => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {
@@ -31,11 +31,11 @@ const getDiscountByProductId = (productId) => {
     },
   };
 
-  return axios.get(API_URL + "product/" + productId, config);
+  return axios.get(API_URL + 'product/' + productId, config);
 };
 
-const deleteDiscountByProductId = (discountId) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const deleteDiscountByProductId = discountId => {
+  const user = JSON.parse(localStorage.getItem('user'));
   const token = user.accessToken;
 
   const config = {

@@ -1,22 +1,20 @@
-import React, { useRef, useEffect, useState } from "react";
-import AuthService from "../services/auth.service";
-import { useLocation } from "react-router-dom";
-import Breadcrumbs from "./Breadcrumbs";
-import OwnerService from "../services/owner.service";
+import { useRef, useEffect, useState } from 'react';
+import AuthService from '../services/auth.service';
+import Breadcrumbs from './Breadcrumbs';
+import OwnerService from '../services/owner.service';
 
 const ProfileMore = () => {
   const [loading, setLoading] = useState(true);
   const [owner, setOwner] = useState(null);
   const currentUser = AuthService.getCurrentUser();
   let form = useRef(null);
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     const form_data = new FormData(form.current);
     let payload = {};
     form_data.forEach(function (value, key) {
       payload[key] = value;
     });
-    console.log("payload", payload);
   };
 
   useEffect(() => {
@@ -25,23 +23,19 @@ const ProfileMore = () => {
         const response = await OwnerService.getOwnerById();
         const ownerFound = response.data;
         setOwner(ownerFound);
-        console.log(owner);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching your owner details:", error);
         setLoading(false);
       }
     };
     fetchOwner();
   }, []);
 
-  const location = useLocation();
   const getBreadcrumbs = () => {
     const paths = [
-      { name: "Home", url: "/" },
-      { name: "Profile", url: "/profile" },
+      { name: 'Home', url: '/' },
+      { name: 'Profile', url: '/profile' },
     ];
-    const currentPath = location.pathname;
     return paths;
   };
 
@@ -55,9 +49,7 @@ const ProfileMore = () => {
           <div className="container mx-auto dark:bg-gray-800 rounded mb-4">
             <div className="xl:w-full py-5 bg-white dark:bg-gray-800">
               <div className="flex w-11/12 mx-auto xl:w-full xl:mx-0 items-center p-3">
-                <p className="text-lg text-gray-800 dark:text-gray-100 font-bold">
-                  Profile
-                </p>
+                <p className="text-lg text-gray-800 dark:text-gray-100 font-bold">Profile</p>
                 <div className="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

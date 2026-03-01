@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import loadingImage from "../assets/images/loading.svg";
+import loadingImage from '../assets/images/loading.svg';
 
 function Loading() {
   return (

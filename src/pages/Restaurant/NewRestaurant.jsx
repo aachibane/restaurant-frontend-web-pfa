@@ -1,32 +1,25 @@
-import React, { useEffect, useState, useRef } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import RestService from "../../services/restaurant.service";
-import AuthService from "../../services/auth.service";
-import { isEmail } from "validator";
-import { Textarea } from "@tremor/react";
-import { useLocation } from "react-router-dom";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import GeoLocation from "../../components/GeoLocation";
-import Skeleton from "./Skeleton";
+import { useEffect, useState, useRef } from 'react';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
+import RestService from '../../services/restaurant.service';
+import AuthService from '../../services/auth.service';
+import { isEmail } from 'validator';
+import { Textarea } from '@tremor/react';
+import Breadcrumbs from '../../components/Breadcrumbs';
+import GeoLocation from '../../components/GeoLocation';
+import Skeleton from './Skeleton';
 
-const required = (value) => {
+const required = value => {
   if (!value) {
-    return (
-      <div className="text-sm text-gray-500 dark:text-gray-300">
-        This field is required!
-      </div>
-    );
+    return <div className="text-sm text-gray-500 dark:text-gray-300">This field is required!</div>;
   }
 };
 
-const validEmail = (value) => {
+const validEmail = value => {
   if (!isEmail(value)) {
     return (
-      <div className="text-sm text-gray-500 dark:text-gray-300">
-        This is not a valid email.
-      </div>
+      <div className="text-sm text-gray-500 dark:text-gray-300">This is not a valid email.</div>
     );
   }
 };
@@ -34,94 +27,71 @@ const validEmail = (value) => {
 const NewRestaurant = () => {
   const [restaurantOwned, setRestaurantOwned] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState(undefined);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [location, setLocation] = useState(null);
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [cuisine, setCuisine] = useState("");
-  const [description, setDescription] = useState("");
-  const [instagram, setInstagram] = useState("");
-  const [priceRange, setPriceRange] = useState("");
-  const [locationError, setLocationError] = useState("");
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [cuisine, setCuisine] = useState('');
+  const [description, setDescription] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [priceRange, setPriceRange] = useState('');
+  const [locationError, setLocationError] = useState('');
 
   const [logoFile, setLogoFile] = useState(null);
   const [coverFile, setCoverFile] = useState(null);
   const [successful, setSuccessful] = useState(false);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const form = useRef();
   const checkBtn = useRef();
+  const currentUser = AuthService.getCurrentUser();
 
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
-    if (user) {
-      setCurrentUser(user);
-    }
     const fetchRestaurants = async () => {
       try {
         const response = await RestService.getRestaurantByOwnerId();
         const restaurantOwned = response.data;
         setRestaurantOwned(restaurantOwned);
-        console.log(restaurantOwned);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching your restaurant:", error);
         setLoading(false);
       }
     };
     fetchRestaurants();
   }, []);
 
-  const onChangeEmail = (e) => setEmail(e.target.value);
-  const onChangeLocation = (e) => setLocation(e.target.value);
-  const onChangeName = (e) => setName(e.target.value);
-  const onChangeCuisine = (e) => setCuisine(e.target.value);
-  const onChangePhoneNumber = (e) => setPhoneNumber(e.target.value);
-  const onChangeDescription = (e) => setDescription(e.target.value);
-  const onChangeInstagram = (e) => setInstagram(e.target.value);
-  const onChangePriceRange = (e) => setPriceRange(e.target.value);
+  const onChangeEmail = e => setEmail(e.target.value);
+  const onChangeLocation = e => setLocation(e.target.value);
+  const onChangeName = e => setName(e.target.value);
+  const onChangeCuisine = e => setCuisine(e.target.value);
+  const onChangePhoneNumber = e => setPhoneNumber(e.target.value);
+  const onChangeDescription = e => setDescription(e.target.value);
+  const onChangeInstagram = e => setInstagram(e.target.value);
+  const onChangePriceRange = e => setPriceRange(e.target.value);
 
-  const handleLogoFileChange = (e) => {
+  const handleLogoFileChange = e => {
     setLogoFile(e.target.files[0]);
-    console.log(e.target.files[0]);
   };
 
-  const handleCoverFileChange = (e) => {
+  const handleCoverFileChange = e => {
     setCoverFile(e.target.files[0]);
-    console.log(e.target.files[0]);
-    console.log("1-logo: " + logoFile);
-    console.log("2-cover: " + coverFile);
   };
 
-  const handleLocationChange = (coords) => {
+  const handleLocationChange = coords => {
     setLocation(coords);
-    setLocationError(""); // Clear location error when location is set
+    setLocationError(''); // Clear location error when location is set
   };
 
-  const handleRestaurant = (e) => {
+  const handleRestaurant = e => {
     e.preventDefault();
 
-    setMessage("");
+    setMessage('');
     setSuccessful(false);
 
     form.current.validateAll();
     const ownerId = currentUser.ownerId;
-    console.log(
-      JSON.stringify({
-        email,
-        location,
-        name,
-        cuisine,
-        phoneNumber,
-        description,
-        instagram,
-        priceRange,
-        ownerId,
-      })
-    );
 
     if (!location) {
-      setLocationError("Location is required!");
+      setLocationError('Location is required!');
       return;
     }
 
@@ -140,49 +110,43 @@ const NewRestaurant = () => {
       });
 
       const blob = new Blob([json], {
-        type: "application/json",
+        type: 'application/json',
       });
 
-      formData.append("restaurant", blob);
-      formData.append("logoFile", logoFile);
-      formData.append("coverFile", coverFile);
+      formData.append('restaurant', blob);
+      formData.append('logoFile', logoFile);
+      formData.append('coverFile', coverFile);
       const RestaurantId = restaurantOwned.id;
       if (RestaurantId) {
-        formData.append("restaurantId", RestaurantId);
+        formData.append('restaurantId', RestaurantId);
         RestService.modifyRestaurant(formData).then(
-          (response) => {
+          response => {
             setMessage(response.data.message);
             setSuccessful(true);
             updateRestaurant();
           },
-          (error) => {
+          error => {
             const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
+              (error.response && error.response.data && error.response.data.message) ||
               error.message ||
               error.toString();
-            console.log(error);
             setMessage(resMessage);
             setSuccessful(false);
           }
         );
       } else {
-        formData.append("ownerId", ownerId);
+        formData.append('ownerId', ownerId);
         RestService.addRestaurant(formData).then(
-          (response) => {
+          response => {
             setMessage(response.data.message);
             setSuccessful(true);
             updateRestaurant();
           },
-          (error) => {
+          error => {
             const resMessage =
-              (error.response &&
-                error.response.data &&
-                error.response.data.message) ||
+              (error.response && error.response.data && error.response.data.message) ||
               error.message ||
               error.toString();
-            console.log(error);
             setMessage(resMessage);
             setSuccessful(false);
           }
@@ -192,22 +156,16 @@ const NewRestaurant = () => {
   };
 
   const updateRestaurant = async () => {
-    try {
-      const responseCategories = await RestService.getRestaurantByOwnerId();
-      const RestaurantOwned = responseCategories.data;
-      setRestaurantOwned(RestaurantOwned);
-    } catch (error) {
-      console.error("Error fetching updated categories:", error);
-    }
+    const responseCategories = await RestService.getRestaurantByOwnerId();
+    const RestaurantOwned = responseCategories.data;
+    setRestaurantOwned(RestaurantOwned);
   };
 
-  const locationB = useLocation();
   const getBreadcrumbs = () => {
     const paths = [
-      { name: "Home", url: "/" },
-      { name: "Restaurant", url: "/restaurant/new" },
+      { name: 'Home', url: '/' },
+      { name: 'Restaurant', url: '/restaurant/new' },
     ];
-    const currentPath = locationB.pathname;
     return paths;
   };
 
@@ -222,8 +180,8 @@ const NewRestaurant = () => {
             <div className="mx-auto w-full max-w-[1280px]">
               <span className="block text-3xl font-semibold mb-4 dark:text-white">
                 {restaurantOwned.id
-                  ? "Modify Restaurant " + restaurantOwned.name
-                  : "Add Restaurant"}
+                  ? 'Modify Restaurant ' + restaurantOwned.name
+                  : 'Add Restaurant'}
               </span>
               <Form onSubmit={handleRestaurant} ref={form}>
                 <div className="mb-5">
@@ -269,8 +227,7 @@ const NewRestaurant = () => {
                     htmlFor="location"
                     className="mb-3 block dark:text-white font-medium text-[#07074D]"
                   >
-                    Location{" "}
-                    {location ? console.log(location) : " Not selected !"}
+                    Location {!location && ' Not selected !'}{' '}
                   </label>
                   <GeoLocation onLocationChange={handleLocationChange} />
                   <Input
@@ -280,11 +237,8 @@ const NewRestaurant = () => {
                     required
                     value={
                       location
-                        ? "Latitude: " +
-                          location.latitude +
-                          " / Longitude: " +
-                          location.longitude
-                        : ""
+                        ? 'Latitude: ' + location.latitude + ' / Longitude: ' + location.longitude
+                        : ''
                     }
                     disabled
                     onChange={onChangeLocation}
@@ -292,9 +246,7 @@ const NewRestaurant = () => {
                     className="w-full px-6 mt-5 dark:text-gray-200 dark:bg-gray-600 py-3 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
                   />
                   {locationError && (
-                    <div className="text-sm text-red-500 dark:text-red-300">
-                      {locationError}
-                    </div>
+                    <div className="text-sm text-red-500 dark:text-red-300">{locationError}</div>
                   )}
                 </div>
 
@@ -424,7 +376,7 @@ const NewRestaurant = () => {
                   <div className="text-sm text-center text-gray-700 dark:text-gray-200 mb-8">
                     <div
                       className={`${
-                        successful ? "bg-green-500" : "bg-red-500"
+                        successful ? 'bg-green-500' : 'bg-red-500'
                       } text-white font-bold rounded-lg border border-white shadow-lg p-5`}
                       role="alert"
                     >
@@ -432,19 +384,15 @@ const NewRestaurant = () => {
                     </div>
                   </div>
                 )}
-                <CheckButton
-                  className="text-sm"
-                  style={{ display: "none" }}
-                  ref={checkBtn}
-                />
+                <CheckButton className="text-sm" style={{ display: 'none' }} ref={checkBtn} />
                 <div>
                   <button
                     type="submit"
                     className="hover:shadow-form rounded-md bg-tertiary hover:bg-[#007B82] py-3 px-8 text-white font-semibold dark:text-white outline-none"
                   >
                     {restaurantOwned.id
-                      ? "Modify Restaurant " + restaurantOwned.name
-                      : "Add Restaurant"}
+                      ? 'Modify Restaurant ' + restaurantOwned.name
+                      : 'Add Restaurant'}
                   </button>
                 </div>
               </Form>

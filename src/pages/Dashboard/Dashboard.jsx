@@ -1,45 +1,40 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import DashboardCard from "./DashboardCard";
-import GraphComponent from "./GraphComponent";
-import ProductsData from "./ProductsData";
-import OrdersData from "./OrdersData";
-import ClientsData from "./ClientsData";
-import PointsData from "./PointsData";
-import FeedbacksData from "./FeedbacksData";
-import WaitersData from "./WaitersData";
-import GeneralData from "./GeneralData";
+import { useState } from 'react';
+import Breadcrumbs from '../../components/Breadcrumbs';
+import ProductsData from './ProductsData';
+import OrdersData from './OrdersData';
+import ClientsData from './ClientsData';
+import PointsData from './PointsData';
+import FeedbacksData from './FeedbacksData';
+import WaitersData from './WaitersData';
 
 const Dashboard = () => {
   const [selectedContent, setSelectedContent] = useState(null);
-  const location = useLocation();
 
   const getBreadcrumbs = () => {
     const paths = [
-      { name: "Home", url: "/" },
-      { name: "Dashboard", url: "/dashboard" },
+      { name: 'Home', url: '/' },
+      { name: 'Dashboard', url: '/dashboard' },
     ];
     return paths;
   };
 
-  const handleContentClick = (content) => {
+  const handleContentClick = content => {
     setSelectedContent(content);
   };
 
   const getContentComponent = () => {
     switch (selectedContent) {
-      case "ProductsData":
+      case 'ProductsData':
         return <ProductsData />;
-      case "OrdersData":
+      case 'OrdersData':
         return <OrdersData />;
-      case "ClientsData":
+      case 'ClientsData':
         return <ClientsData />;
-      case "PointsData":
+      case 'PointsData':
         return <PointsData />;
-      case "WaitersData":
+      case 'WaitersData':
         return <WaitersData />;
-      case "FeedbacksData":
+      case 'FeedbacksData':
         return <FeedbacksData />;
       default:
         return <ProductsData />;
@@ -75,7 +70,7 @@ const Dashboard = () => {
               </p>
               <button
                 className="nav-link w-full flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                onClick={() => handleContentClick("ProductsData")}
+                onClick={() => handleContentClick('ProductsData')}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +90,7 @@ const Dashboard = () => {
               </button>
               <button
                 className="nav-link w-full flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                onClick={() => handleContentClick("OrdersData")}
+                onClick={() => handleContentClick('OrdersData')}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -105,17 +100,13 @@ const Dashboard = () => {
                   stroke="#00ADB5"
                   className="w-6 h-6"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 7h18M3 12h18M3 17h18"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 7h18M3 12h18M3 17h18" />
                 </svg>
                 <span className="mx-2 text-sm font-medium">Orders</span>
               </button>
               <button
                 className="nav-link w-full flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                onClick={() => handleContentClick("WaitersData")}
+                onClick={() => handleContentClick('WaitersData')}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -135,7 +126,7 @@ const Dashboard = () => {
               </button>
               <button
                 className="nav-link w-full flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700"
-                onClick={() => handleContentClick("FeedbacksData")}
+                onClick={() => handleContentClick('FeedbacksData')}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -145,11 +136,7 @@ const Dashboard = () => {
                   stroke="#00ADB5"
                   className="w-6 h-6"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 14l9-5-9-5-9 5 9 5z"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

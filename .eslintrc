@@ -28,4 +28,19 @@
       "version": "detect",
     },
   },
+  "overrides": [
+    {
+      "files": ["postcss.config.js", "tailwind.config.js", "setupProxy.js", "src/setupProxy.js"],
+      "env": {
+        "node": true,
+        "commonjs": true,
+      },
+    },
+    {
+      "files": ["src/utils/dataProvider/base/index.js"],
+      "env": {
+        "node": true,
+      },
+    },
+  ],
 }

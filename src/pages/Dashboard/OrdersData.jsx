@@ -1,41 +1,32 @@
-import React, { useEffect, useState } from "react";
-import RestService from "../../services/restaurant.service";
-import OrderService from "../../services/dashboard.service";
-import DashboardCard from "./DashboardCard";
-import Chart from "chart.js/auto";
+import { useEffect, useRef, useState } from 'react';
+import RestService from '../../services/restaurant.service';
+import OrderService from '../../services/dashboard.service';
+import DashboardCard from './DashboardCard';
+import Chart from 'chart.js/auto';
 
 const OrdersData = () => {
   const [restaurantOwned, setRestaurantOwned] = useState(null);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [chart, setChart] = useState(null);
+  const chartRef = useRef(null);
 
-  const calculateStats = (orders) => {
+  const calculateStats = orders => {
     if (!orders || orders.length === 0) {
-      return {
-        maxPrice: 0,
-        minPrice: 0,
-        avgPrice: 0,
-      };
+      return { maxPrice: 0, minPrice: 0, avgPrice: 0 };
     }
-
     let total = 0;
     let max = orders[0].totalPrice;
     let min = orders[0].totalPrice;
-
-    orders.forEach((order) => {
+    orders.forEach(order => {
       total += order.totalPrice;
       if (order.totalPrice > max) max = order.totalPrice;
       if (order.totalPrice < min) min = order.totalPrice;
     });
-
-    const avg = total / orders.length;
-
     return {
       maxPrice: max,
       minPrice: min,
-      avgPrice: avg.toFixed(2), // Fix the average to 2 decimal places
+      avgPrice: (total / orders.length).toFixed(2),
     };
   };
 
@@ -45,63 +36,51 @@ const OrdersData = () => {
         const response = await RestService.getRestaurantByOwnerId();
         const restaurantOwned = response.data;
         setRestaurantOwned(restaurantOwned);
-
-        const responseOrders = await OrderService.getOrdersByRestaurantId(
-          restaurantOwned.id
-        );
-        const ordersRestaurantOwned = responseOrders.data;
-        setOrders(ordersRestaurantOwned);
+        const responseOrders = await OrderService.getOrdersByRestaurantId(restaurantOwned.id);
+        setOrders(responseOrders.data);
         setLoading(false);
-      } catch (error) {
-        console.error("Error fetching your restaurant:", error);
-        setError("Error fetching data. Please try again later.");
+      } catch (err) {
+        setError('Error fetching data. Please try again later.');
         setLoading(false);
       }
     };
-
     fetchRestaurants();
   }, []);
 
   useEffect(() => {
-    if (orders.length > 0) {
-      setTimeout(() => {
-        const canvas = document.getElementById("orderChart");
-        if (!canvas) {
-          console.error("Canvas element not found");
-          return;
-        }
-        const ctx = canvas.getContext("2d");
-        if (!ctx) {
-          console.error("Failed to get canvas context");
-          return;
-        }
+    if (orders.length === 0) return;
 
-        if (chart) chart.destroy();
+    const timer = setTimeout(() => {
+      const canvas = document.getElementById('orderChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
 
-        const newChart = new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: orders.map((order, index) => `Order ${index + 1}`),
-            datasets: [
-              {
-                label: "Total Price",
-                data: orders.map((order) => order.totalPrice),
-                backgroundColor: "rgba(75, 192, 192, 0.2)",
-                borderColor: "rgba(75, 192, 192, 1)",
-                borderWidth: 1,
-              },
-            ],
-          },
-          options: {
-            scales: {
-              y: { beginAtZero: true },
+      if (chartRef.current) chartRef.current.destroy();
+
+      chartRef.current = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: orders.map((_, index) => `Order ${index + 1}`),
+          datasets: [
+            {
+              label: 'Total Price',
+              data: orders.map(order => order.totalPrice),
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1,
             },
+          ],
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true },
           },
-        });
+        },
+      });
+    }, 0);
 
-        setChart(newChart);
-      }, 0);
-    }
+    return () => clearTimeout(timer);
   }, [orders]);
 
   const stats = calculateStats(orders);
@@ -117,17 +96,12 @@ const OrdersData = () => {
           <h2 className="text-xl font-bold mb-4">
             Orders for {restaurantOwned && restaurantOwned.name}
           </h2>
-          <DashboardCard
-            title="Total Orders"
-            content={`Total: ${orders && orders.length}`}
-          />
+          <DashboardCard title="Total Orders" content={`Total: ${orders.length}`} />
           <div className="my-4">
-            {orders.map((order) => (
+            {orders.map(order => (
               <div key={order.id} className="mb-2 p-2 border rounded">
                 <p>Order ID: {order.id}</p>
                 <p>Total Price: ${order.totalPrice}</p>
-                {/*<p>Order Date: {new Date(order.date).toLocaleDateString()}</p>*/}
-                {/* Add more details about each order as needed */}
               </div>
             ))}
           </div>
